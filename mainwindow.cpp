@@ -20,17 +20,6 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_lf_load_clicked()
-{
-    //QString filename = QFileDialog::getOpenFileName(this, tr("Open Image"), ".", tr("Images (*.png *.jpg *.jpeg *.bmp)"));
-    QString OutputFolder = QFileDialog::getExistingDirectory(0, ("Select Output Folder"), QDir::currentPath());
-
-    if (OutputFolder.compare("")){
-        emit transmit_LF_name(OutputFolder);
-    }
-}
-
-
 void MainWindow::lf_update_display(QString fn, bool flag){
     if (fn.compare("")){
         QImage lf_img;
@@ -51,17 +40,6 @@ void MainWindow::lf_update_display(QString fn, bool flag){
     std::cout << "Start Here" << std::endl;
 }
 
-
-
-void MainWindow::on_test_seq_btn_clicked()
-{
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open Text"), ".", tr("Text files (*.txt)"));
-
-    if (filename.compare("")){
-        emit transmit_test_sequence(filename);
-    }
-}
-
 void MainWindow::mouseMoveEvent(QMouseEvent *event){
     //QPoint test = MainWindow::mapFromGlobal(event->pos());
     QPoint delta = pos_ref-(event->pos());
@@ -72,7 +50,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event){
         //std::cout << "delta: " << delta.x() << ";" << delta.y() << std::endl;
         pos_ref+=delta;
         //std::cout << "ref: " << pos_ref.x() << ";" << pos_ref.y() << std::endl;
-        //emit change_view_event(delta);
+        emit change_view_event(delta);
     }
 }
 

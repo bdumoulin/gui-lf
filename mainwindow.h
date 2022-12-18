@@ -26,9 +26,7 @@ signals:
     void change_view_event(QPoint delta);
 
 private slots:
-    void on_lf_load_clicked();
     void lf_update_display(QString fn, bool flag);   // 0 pour gauche, 1 pour droite
-    void on_test_seq_btn_clicked();
 
 private:
     Ui::MainWindow *ui;
