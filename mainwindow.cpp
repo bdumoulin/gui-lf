@@ -66,12 +66,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event){
     //QPoint test = MainWindow::mapFromGlobal(event->pos());
     QPoint delta = pos_ref-(event->pos());
     //QPoint delta = pos_ref-test;
-    std::cout << "new pos: " << event->pos().x() << ";" << event->pos().y() << std::endl;
+    //std::cout << "new pos: " << event->pos().x() << ";" << event->pos().y() << std::endl;
     //std::cout << "test: " << test.x() << ";" << test.y() << std::endl;
     if ((abs(delta.x())>=unit_to_change) || (abs(delta.y())>=unit_to_change)){
-        std::cout << "delta: " << delta.x() << ";" << delta.y() << std::endl;
+        //std::cout << "delta: " << delta.x() << ";" << delta.y() << std::endl;
         pos_ref+=delta;
-        std::cout << "ref: " << pos_ref.x() << ";" << pos_ref.y() << std::endl;
+        //std::cout << "ref: " << pos_ref.x() << ";" << pos_ref.y() << std::endl;
         //emit change_view_event(delta);
     }
 }

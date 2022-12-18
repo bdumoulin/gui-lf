@@ -78,12 +78,12 @@ void control::update_current_SAI(Direction change){
 
 
 
-void control::receive_LF_name(QString dir){
-    this->original->setName(dir.toStdString());
-    this->original->loadSAIfromDir(dir.toStdString(),this->original->getNbx()*this->original->getNby());
+void control::set_LF_name(std::string dir){
+    this->original->setName(dir);
+    this->original->loadSAIfromDir(dir,this->original->getNbx()*this->original->getNby());
     //std::cout << *this->original << std::endl;
-    this->distorded->setName(dir.toStdString());
-    this->distorded->loadSAIfromDir(dir.toStdString(),this->distorded->getNbx()*this->distorded->getNby());
+    this->distorded->setName(dir);
+    this->distorded->loadSAIfromDir(dir,this->distorded->getNbx()*this->distorded->getNby());
     //std::cout << *this->distorded << std::endl;
 
     emit update_view_event(QString::fromStdString(this->original->getCurrent()->getName()),0);
