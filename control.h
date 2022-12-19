@@ -5,6 +5,7 @@
 #include <QCursor>
 #include <iostream>
 #include <cstdlib>
+
 #include "lfimage.h"
 
 enum Direction {left=1, right, top, bottom, top_left, top_right, bottom_left, bottom_right}; // utile ????

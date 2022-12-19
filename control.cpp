@@ -1,6 +1,6 @@
 #include "control.h"
 
-static int unit_to_change=200;
+static int unit_to_change=100;
 
 control::control(QObject *parent, LFimage *original, LFimage *distorded)
     : QObject{parent}
@@ -122,6 +122,7 @@ void control::receive_update_view(QPoint delta){
         }
     }
 
+    std::cout << dir << std::endl;
     if(this->original->getName() != ""){
         this->update_current_SAI(dir);
         emit update_view_event(QString::fromStdString(this->original->getCurrent()->getName()),0);

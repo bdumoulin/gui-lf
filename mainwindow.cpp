@@ -3,8 +3,8 @@
 
 #include <QFileDialog>
 
-static int unit_to_change=500;
-static QPoint pos_ref(960,500);
+static int unit_to_change=100;
+static QPoint pos_ref(960,540);
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -37,19 +37,17 @@ void MainWindow::lf_update_display(QString fn, bool flag){
             }
         }
     }
-    std::cout << "Start Here" << std::endl;
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event){
-    //QPoint test = MainWindow::mapFromGlobal(event->pos());
     QPoint delta = pos_ref-(event->pos());
-    //QPoint delta = pos_ref-test;
-    //std::cout << "new pos: " << event->pos().x() << ";" << event->pos().y() << std::endl;
-    //std::cout << "test: " << test.x() << ";" << test.y() << std::endl;
+    std::cout << "new pos: " << event->pos().x() << ";" << event->pos().y() << std::endl;
     if ((abs(delta.x())>=unit_to_change) || (abs(delta.y())>=unit_to_change)){
-        //std::cout << "delta: " << delta.x() << ";" << delta.y() << std::endl;
-        pos_ref+=delta;
-        //std::cout << "ref: " << pos_ref.x() << ";" << pos_ref.y() << std::endl;
+        std::cout << "delta: " << delta.x() << ";" << delta.y() << std::endl;
+        //pos_ref+=delta;
+        pos_ref.setX(event->pos().x());
+        pos_ref.setY(event->pos().y());
+        std::cout << "ref: " << pos_ref.x() << ";" << pos_ref.y() << std::endl;
         emit change_view_event(delta);
     }
 }
