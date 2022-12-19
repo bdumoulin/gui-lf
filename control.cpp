@@ -2,92 +2,92 @@
 
 static int unit_to_change=100;
 
-control::control(QObject *parent, LFimage *original, LFimage *distorded)
+control::control(QObject *parent, LFimage *distorded_left, LFimage *distorded_right)
     : QObject{parent}
 {
-    if(original==nullptr){
-        this->original = new LFimage("");
+    if(distorded_left==nullptr){
+        this->distorded_left = new LFimage("");
     } else {
-        this->original = original;
+        this->distorded_left = distorded_left;
     }
 
-    if(distorded==nullptr){
-        this->distorded = new LFimage("");
+    if(distorded_right==nullptr){
+        this->distorded_right = new LFimage("");
     } else {
-        this->distorded = distorded;
+        this->distorded_right = distorded_right;
     }
 }
 
 
 void control::update_current_SAI(Direction change){
-    int index = this->original->getCurrentIndex();
+    int index = this->distorded_left->getCurrentIndex();
     switch(change){
 
         case left:
-            if((index%this->original->getNbx()))
+            if((index%this->distorded_left->getNbx()))
                 index-=1;
             break;
         case right:
-            if(((index+1)%this->original->getNbx()))
+            if(((index+1)%this->distorded_left->getNbx()))
                 index+=1;
             break;
         case top:
-            if(index > this->original->getNbx())
-                index-=this->original->getNbx();
+            if(index > this->distorded_left->getNbx())
+                index-=this->distorded_left->getNbx();
             break;
         case bottom:
-            if(index < (this->original->getNbx()*this->original->getNby()))
-                index+=this->original->getNbx();
+            if(index < (this->distorded_left->getNbx()*this->distorded_left->getNby()))
+                index+=this->distorded_left->getNbx();
             break;
         case top_left:
-            if(index > this->original->getNbx()){
-                index-=this->original->getNbx();
+            if(index > this->distorded_left->getNbx()){
+                index-=this->distorded_left->getNbx();
             }
-            if ((index%this->original->getNbx())) {
+            if ((index%this->distorded_left->getNbx())) {
                 index-=1;
             }
             break;
         case top_right:
-            if(index > this->original->getNbx()){
-                index-=this->original->getNbx();
+            if(index > this->distorded_left->getNbx()){
+                index-=this->distorded_left->getNbx();
             }
-            if (((index+1)%this->original->getNbx())) {
+            if (((index+1)%this->distorded_left->getNbx())) {
                 index+=1;
             }
             break;
         case bottom_left:
-            if(index < (this->original->getNbx()*this->original->getNby())){
-                index+=this->original->getNbx();
+            if(index < (this->distorded_left->getNbx()*this->distorded_left->getNby())){
+                index+=this->distorded_left->getNbx();
             }
-            if ((index%this->original->getNbx())) {
+            if ((index%this->distorded_left->getNbx())) {
                 index-=1;
             }
             break;
         case bottom_right:
-            if(index < (this->original->getNbx()*this->original->getNby())){
-                index+=this->original->getNbx();
+            if(index < (this->distorded_left->getNbx()*this->distorded_left->getNby())){
+                index+=this->distorded_left->getNbx();
             }
-            if (((index+1)%this->original->getNbx())) {
+            if (((index+1)%this->distorded_left->getNbx())) {
                 index+=1;
             }
             break;
     }
-    this->original->setCurrent(index);
-    this->distorded->setCurrent(index);
+    this->distorded_left->setCurrent(index);
+    this->distorded_right->setCurrent(index);
 }
 
 
 
 void control::set_LF_name(std::string dir){
-    this->original->setName(dir);
-    this->original->loadSAIfromDir(dir,this->original->getNbx()*this->original->getNby());
+    this->distorded_left->setName(dir);
+    this->distorded_left->loadSAIfromDir(dir,this->distorded_left->getNbx()*this->distorded_left->getNby());
     //std::cout << *this->original << std::endl;
-    this->distorded->setName(dir);
-    this->distorded->loadSAIfromDir(dir,this->distorded->getNbx()*this->distorded->getNby());
+    this->distorded_right->setName(dir);
+    this->distorded_right->loadSAIfromDir(dir,this->distorded_right->getNbx()*this->distorded_right->getNby());
     //std::cout << *this->distorded << std::endl;
 
-    emit update_view_event(QString::fromStdString(this->original->getCurrent()->getName()),0);
-    emit update_view_event(QString::fromStdString(this->distorded->getCurrent()->getName()),1);
+    emit update_view_event(QString::fromStdString(this->distorded_left->getCurrent()->getName()),0);
+    emit update_view_event(QString::fromStdString(this->distorded_right->getCurrent()->getName()),1);
 }
 
 void control::receive_test_sequence(QString fn){
@@ -123,9 +123,9 @@ void control::receive_update_view(QPoint delta){
     }
 
     std::cout << dir << std::endl;
-    if(this->original->getName() != ""){
+    if(this->distorded_left->getName() != ""){
         this->update_current_SAI(dir);
-        emit update_view_event(QString::fromStdString(this->original->getCurrent()->getName()),0);
-        emit update_view_event(QString::fromStdString(this->distorded->getCurrent()->getName()),1);
+        emit update_view_event(QString::fromStdString(this->distorded_left->getCurrent()->getName()),0);
+        emit update_view_event(QString::fromStdString(this->distorded_right->getCurrent()->getName()),1);
     }
 }

@@ -19,6 +19,7 @@ public:
     ~MainWindow();
 
     void mouseMoveEvent(QMouseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 signals:
     void transmit_LF_name(QString dir);

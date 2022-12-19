@@ -16,7 +16,7 @@ class control : public QObject
 
     Q_OBJECT
 public:
-    explicit control(QObject *parent = nullptr, LFimage *original=nullptr, LFimage *distorded=nullptr);
+    explicit control(QObject *parent = nullptr, LFimage *distorded_left=nullptr, LFimage *distorded_right=nullptr);
 
     void update_current_SAI(Direction change);
     void set_LF_name(std::string dir);
@@ -29,8 +29,8 @@ public slots:
     void receive_update_view(QPoint delta);
 
 private:
-    LFimage *original;
-    LFimage *distorded;
+    LFimage *distorded_left;
+    LFimage *distorded_right;
 };
 
 #endif // CONTROL_H

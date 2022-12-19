@@ -37,7 +37,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="original">
+       <widget class="QLabel" name="distorded_left">
         <property name="minimumSize">
          <size>
           <width>625</width>
@@ -78,7 +78,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="distorded">
+       <widget class="QLabel" name="distorded_right">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>

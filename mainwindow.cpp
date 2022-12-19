@@ -29,11 +29,11 @@ void MainWindow::lf_update_display(QString fn, bool flag){
             if (flag){
                 //int width = lf_img.width();
                 //int height = lf_img.height();
-                ui->original->setPixmap(QPixmap::fromImage(lf_img));
+                ui->distorded_left->setPixmap(QPixmap::fromImage(lf_img));
             } else {
                 //int width = lf_img.width();
                 //int height = lf_img.height();
-                ui->distorded->setPixmap(QPixmap::fromImage(lf_img));
+                ui->distorded_right->setPixmap(QPixmap::fromImage(lf_img));
             }
         }
     }
@@ -49,6 +49,15 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event){
         pos_ref.setY(event->pos().y());
         std::cout << "ref: " << pos_ref.x() << ";" << pos_ref.y() << std::endl;
         emit change_view_event(delta);
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    switch(event->key()){
+        case Qt::Key_Left:
+            break;
+        case Qt::Key_Right:
+            break;
     }
 }
 
