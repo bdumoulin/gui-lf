@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     std::string lf_path = "..\\gui-lf\\Datasets\\R1\\R1";
     c.set_LF_name(lf_path);
 
-    w.showMaximized();
+    w.showFullScreen();
     int res = a.exec();
     return res;
 }

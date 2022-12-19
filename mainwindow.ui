@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(128, 128, 128);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="mouseTracking">
     <bool>true</bool>
@@ -131,7 +134,7 @@
      <x>0</x>
      <y>0</y>
      <width>1368</width>
-     <height>31</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
