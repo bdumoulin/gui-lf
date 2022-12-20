@@ -16,11 +16,20 @@ int main(int argc, char *argv[])
 
     //MainWindow::connect(&w,SIGNAL(transmit_LF_name(QString)),&c,SLOT(receive_LF_name(QString)));
     MainWindow::connect(&c,SIGNAL(update_view_event(QString,bool)),&w,SLOT(lf_update_display(QString,bool)));
-    MainWindow::connect(&w,SIGNAL(transmit_test_sequence(QString)),&c,SLOT(receive_test_sequence(QString)));
     MainWindow::connect(&w,SIGNAL(change_view_event(QPoint)),&c,SLOT(receive_update_view(QPoint)));
 
-    std::string lf_path = "..\\gui-lf\\Datasets\\R1\\R1";
-    c.set_LF_name(lf_path);
+    std::string order_path = "..\\gui-lf\\order_R1.txt";
+
+    std::ifstream order;
+    order.open(order_path);
+
+    if (!order) {
+        std::cerr << "Unable to open file order.txt";
+        exit(1);   // call system to stop
+    }
+
+    w.readNewPair(order, c);
+    //c.set_LF_name(lf_path);
 
     w.showFullScreen();
     int res = a.exec();

@@ -3,7 +3,10 @@
 
 #include <QMainWindow>
 #include <iostream>
+#include <fstream>
 #include <QMouseEvent>
+
+#include "control.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -18,13 +21,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void readNewPair(std::ifstream &order, control &c);
+
     void mouseMoveEvent(QMouseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
 
 signals:
     void transmit_LF_name(QString dir);
-    void transmit_test_sequence(QString fn);
     void change_view_event(QPoint delta);
+    void choice_made_event(QString toWrite);
 
 private slots:
     void lf_update_display(QString fn, bool flag);   // 0 pour gauche, 1 pour droite

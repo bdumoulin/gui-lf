@@ -78,20 +78,16 @@ void control::update_current_SAI(Direction change){
 
 
 
-void control::set_LF_name(std::string dir){
-    this->distorded_left->setName(dir);
-    this->distorded_left->loadSAIfromDir(dir,this->distorded_left->getNbx()*this->distorded_left->getNby());
+void control::set_LF_name(std::string dir_left, std::string dir_right){
+    this->distorded_left->setName(dir_left);
+    this->distorded_left->loadSAIfromDir(dir_left,this->distorded_left->getNbx()*this->distorded_left->getNby());
     //std::cout << *this->original << std::endl;
-    this->distorded_right->setName(dir);
-    this->distorded_right->loadSAIfromDir(dir,this->distorded_right->getNbx()*this->distorded_right->getNby());
+    this->distorded_right->setName(dir_right);
+    this->distorded_right->loadSAIfromDir(dir_right,this->distorded_right->getNbx()*this->distorded_right->getNby());
     //std::cout << *this->distorded << std::endl;
 
     emit update_view_event(QString::fromStdString(this->distorded_left->getCurrent()->getName()),0);
     emit update_view_event(QString::fromStdString(this->distorded_right->getCurrent()->getName()),1);
-}
-
-void control::receive_test_sequence(QString fn){
-    std::cout << "Texte charge : " << fn.toStdString() << std::endl;
 }
 
 

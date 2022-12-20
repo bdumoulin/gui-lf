@@ -19,13 +19,12 @@ public:
     explicit control(QObject *parent = nullptr, LFimage *distorded_left=nullptr, LFimage *distorded_right=nullptr);
 
     void update_current_SAI(Direction change);
-    void set_LF_name(std::string dir);
+    void set_LF_name(std::string dir_left, std::string dir_right);
 
 signals:
     void update_view_event(QString fn, bool flag);
 
 public slots:
-    void receive_test_sequence(QString fn);
     void receive_update_view(QPoint delta);
 
 private:

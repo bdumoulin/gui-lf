@@ -5,6 +5,9 @@
 
 static int unit_to_change=100;
 static QPoint pos_ref(960,540);
+static int buffer=1;
+static std::string folder_lf_path = "..\\gui-lf\\Datasets\\R1";
+static std::string ref_name = "R1";
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -53,11 +56,35 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event){
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
+    int res=0;
     switch(event->key()){
         case Qt::Key_Left:
+            emit choice_made_event("10");
+            res=1;
             break;
         case Qt::Key_Right:
+            emit choice_made_event("01");
+            res=1;
             break;
+    }
+    if (res) {
+        //readNewPair("folder name here");
     }
 }
 
+
+
+void MainWindow::readNewPair(std::ifstream &order, control &c){
+    //std::cout << "nouveau test a faire" << std::endl;
+    std::string str;
+    for(int i=1;;i++){
+        std::getline(order,str);
+        if(i==buffer){
+            buffer++;
+            break;
+        }
+    }
+    if(str.compare("")){
+        c.set_LF_name(folder_lf_path+"\\"+ref_name, folder_lf_path+"\\"+str);
+    }
+}
