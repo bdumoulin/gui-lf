@@ -3,10 +3,7 @@
 
 #include <QMainWindow>
 #include <iostream>
-#include <fstream>
 #include <QMouseEvent>
-
-#include "control.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -20,8 +17,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-    void readNewPair(std::ifstream &order, control &c);
 
     void mouseMoveEvent(QMouseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;

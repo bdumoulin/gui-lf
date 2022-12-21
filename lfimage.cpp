@@ -75,8 +75,9 @@ std::ostream& operator<<(std::ostream& os, const LFimage& img){
     return os;
 }
 
-
+/* pas de push back ou une re init du tableau avant chaque appel */
 void LFimage::loadSAIfromDir(std::string path, int nb_sais){
+    this->tab.clear();
     for (auto &entry : directory_iterator(lf_name)){
         this->tab.push_back(new SAI(entry.path().string()));
     }
