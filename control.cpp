@@ -45,7 +45,7 @@ void control::update_current_SAI(Direction change){
                 index-=this->distorded_left->getNbx();
             break;
         case bottom:
-            if(index < (this->distorded_left->getNbx()*this->distorded_left->getNby()))
+            if(index < (this->distorded_left->getNbx()*(this->distorded_left->getNby()-1)))
                 index+=this->distorded_left->getNbx();
             break;
         case top_left:
@@ -65,7 +65,7 @@ void control::update_current_SAI(Direction change){
             }
             break;
         case bottom_left:
-            if(index < (this->distorded_left->getNbx()*this->distorded_left->getNby())){
+            if(index < (this->distorded_left->getNbx()*(this->distorded_left->getNby()-1))){
                 index+=this->distorded_left->getNbx();
             }
             if ((index%this->distorded_left->getNbx())) {
@@ -73,7 +73,7 @@ void control::update_current_SAI(Direction change){
             }
             break;
         case bottom_right:
-            if(index < (this->distorded_left->getNbx()*this->distorded_left->getNby())){
+            if(index < (this->distorded_left->getNbx()*(this->distorded_left->getNby()-1))){
                 index+=this->distorded_left->getNbx();
             }
             if (((index+1)%this->distorded_left->getNbx())) {
