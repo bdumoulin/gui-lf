@@ -1,6 +1,7 @@
 #include "control.h"
 
 static int unit_to_change=80;
+static int buffer=1;
 static std::string folder_lf_path = "..\\gui-lf\\Datasets\\R1";
 //static std::string ref_name = "R1";
 
@@ -22,7 +23,8 @@ control::control(QObject *parent, LFimage *distorded_left, LFimage *distorded_ri
     this->order.open(order_path);
 
     if (!order) {
-        std::cerr << "Unable to open file order.txt" << std::endl;
+        std::cerr << "*** error: could not open order file\n";
+        perror("Order file failed to open because: ");
         exit(1);   // call system to stop
     }
 
@@ -35,7 +37,7 @@ control::control(QObject *parent, LFimage *distorded_left, LFimage *distorded_ri
 
     if (!(*out)) {
         std::cerr << "*** error: could not open output file\n" ;
-                perror("Output file failed to open because: ");
+        perror("Output file failed to open because: ");
         exit(1);   // call system to stop
     }
 
@@ -151,13 +153,14 @@ void control::receive_update_view(QPoint delta){
 
 
 void control::readNewPair(){
+    bool ended=0;
     //std::cout << "nouveau test a faire" << std::endl;
     std::string str;
     std::string str_left;
     //char *str_arr_left= new char[7];
     std::string str_right;
     //char *str_arr_right=new char[7];
-    for(int i=1;i<=272;i++){
+    if(buffer < 273){
         std::getline(this->order, str);
         int n=str.length();
         bool passed=0;
@@ -174,8 +177,8 @@ void control::readNewPair(){
                 passed=1;
             }
         }
-        break;
-    }
+        buffer++;
+    } else {exit(2);}
     if((str_left.compare(""))&&(str_right.compare(""))){
         this->set_LF_name(folder_lf_path+"\\"+str_left, folder_lf_path+"\\"+str_right);
     }
@@ -183,7 +186,7 @@ void control::readNewPair(){
 
 
 void control::next_lf_image(QString toWrite){
-    //ecrire le résultat dans fichier de sortie
+    *this->out << toWrite.toStdString() << std::endl;
     std::cout << toWrite.toStdString() << std::endl;
     readNewPair();
 }
