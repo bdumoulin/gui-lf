@@ -22,9 +22,23 @@ control::control(QObject *parent, LFimage *distorded_left, LFimage *distorded_ri
     this->order.open(order_path);
 
     if (!order) {
-        std::cerr << "Unable to open file order.txt";
+        std::cerr << "Unable to open file order.txt" << std::endl;
         exit(1);   // call system to stop
     }
+
+    time_t now = time(0);
+    tm * test = localtime(&now);
+    std::string out_name = "D:\\Documents\\GitHub\\gui-lf\\out_tests\\tests_R1_"+std::to_string(test->tm_mday)+"_"
+            +std::to_string(test->tm_mon+1)+"_"+std::to_string(test->tm_year+1900)+"_"+std::to_string(test->tm_min)+".txt";
+    std::cout << out_name << std::endl;
+    out=new std::ofstream(out_name);
+
+    if (!(*out)) {
+        std::cerr << "*** error: could not open output file\n" ;
+                perror("Output file failed to open because: ");
+        exit(1);   // call system to stop
+    }
+
 }
 
 

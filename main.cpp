@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
     MainWindow::connect(&w,SIGNAL(change_view_event(QPoint)),&c,SLOT(receive_update_view(QPoint)));
 
     c.readNewPair();
-
     w.showFullScreen();
     int res = a.exec();
     return res;

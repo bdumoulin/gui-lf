@@ -6,6 +6,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
+#include <chrono>
+#include <ctime>
 
 #include "lfimage.h"
 
@@ -35,6 +37,7 @@ private:
     LFimage *distorded_left;
     LFimage *distorded_right;
     std::ifstream order;
+    std::ofstream *out;
 };
 
 #endif // CONTROL_H
