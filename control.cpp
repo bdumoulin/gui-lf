@@ -28,7 +28,7 @@ control::control(QObject *parent, LFimage *distorded_left, LFimage *distorded_ri
 
     time_t now = time(0);
     tm * test = localtime(&now);
-    std::string out_name = "D:\\Documents\\GitHub\\gui-lf\\out_tests\\tests_R1_"+std::to_string(test->tm_mday)+"_"
+    std::string out_name = "C:\\Users\\Asus\\Temp\\tests_R1_"+std::to_string(test->tm_mday)+"_"
             +std::to_string(test->tm_mon+1)+"_"+std::to_string(test->tm_year+1900)+"_"+std::to_string(test->tm_min)+".txt";
     std::cout << out_name << std::endl;
     out=new std::ofstream(out_name);
