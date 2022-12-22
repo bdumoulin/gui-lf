@@ -1,7 +1,6 @@
 #include "control.h"
 
 static int unit_to_change=80;
-static int buffer=1;
 static std::string folder_lf_path = "..\\gui-lf\\Datasets\\R1";
 //static std::string ref_name = "R1";
 
@@ -146,31 +145,22 @@ void control::readNewPair(){
     //char *str_arr_right=new char[7];
     for(int i=1;i<=272;i++){
         std::getline(this->order, str);
-        if(i==buffer){
-            int n=str.length();
-            //char arr[n+1];
-            //std::strcpy(arr,str_left.c_str());
-            bool passed=0;
-            for(int c=0;c<n;c++){
-                if(str[c]!=';'){
-                    char debug =str[c];
-                    if (passed) {
-                        str_right.push_back(str[c]);
-                    }
-                    if (!passed){
-                        str_left.push_back(str[c]);
-                    }
-                }else{
-                    passed=1;
+        int n=str.length();
+        bool passed=0;
+        for(int c=0;c<n;c++){
+            if(str[c]!=';'){
+                //char debug =str[c];
+                if (passed) {
+                    str_right.push_back(str[c]);
                 }
+                if (!passed){
+                    str_left.push_back(str[c]);
+                }
+            }else{
+                passed=1;
             }
-            //str_right=str_arr_right;
-            //str_left=str_arr_left;
-            std::cout << "buffer:" << buffer << " | " << str << std::endl;
-
-            buffer++;
-            break;
         }
+        break;
     }
     if((str_left.compare(""))&&(str_right.compare(""))){
         this->set_LF_name(folder_lf_path+"\\"+str_left, folder_lf_path+"\\"+str_right);
